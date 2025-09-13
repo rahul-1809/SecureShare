@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Landing + CTA + Form in single page (form hidden until CTA pressed) -->
+<section id="landing" class="text-center py-12 animate-fadeInUp">
+  <h2 class="text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
+    Secure Sharing, Made Simple 🔒
+  </h2>
+  <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+    Share sensitive information safely — links self-destruct after a set time or number of views.
+  </p>
+  <button onclick="showForm()" 
+    class="bg-gradient-to-r from-indigo-500 to-cyan-500 text-white text-lg px-6 py-3 rounded-lg shadow-lg 
+           hover:scale-105 transition transform">
+    ➕ Create Your Secret
+  </button>
+</section>
+
+<section id="formSection" class="hidden animate-fadeInUp">
+  <div class="bg-white dark:bg-gray-900 shadow-lg rounded-xl p-6 mt-8">
+    <form action="{{ url_for('create') }}" method="post" enctype="multipart/form-data" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Secret text (optional)</label>
+        <textarea name="content" rows="4"
+          class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm 
+                 focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm 
+                 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+          placeholder="Enter your secret (or upload a file)"></textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Or upload a file (optional)</label>
+        <input type="file" name="file" class="mt-2 block w-full" />
+      </div>
+
+      <div class="grid grid-cols-3 gap-3">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Expiry value (optional)</label>
+          <input type="number" name="expiry_value" placeholder="e.g. 10"
+            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm sm:text-sm bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Unit</label>
+          <select name="expiry_unit" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm sm:text-sm bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+            <option value="days">Days</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Max views (optional)</label>
+          <input type="number" name="max_views" placeholder="e.g. 3"
+            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm sm:text-sm bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white py-2 px-4 rounded-lg shadow 
+                 hover:scale-105 transition transform">
+          Create Secret Link
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+function showForm() {
+  document.getElementById("landing").classList.add("hidden");
+  document.getElementById("formSection").classList.remove("hidden");
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white dark:bg-gray-900 shadow-lg rounded-xl p-6 text-center space-y-4 animate-fadeInUp">
+  <p class="text-gray-700 dark:text-gray-300">Your secret link has been created:</p>
+  <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
+    <a id="short" href="{{ short_url }}" class="text-cyan-600 dark:text-cyan-300 font-medium break-all">{{ short_url }}</a>
+    <button onclick="copyURL()" 
+      class="ml-2 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white py-1 px-3 rounded-md shadow 
+             hover:scale-105 transition transform">
+      Copy
+    </button>
+  </div>
+
+  {% if is_file %}
+    <p class="text-sm text-gray-500 dark:text-gray-400">Type: File — Downloading the file will count as 1 view.</p>
+  {% else %}
+    <p class="text-sm text-gray-500 dark:text-gray-400">Type: Text</p>
+  {% endif %}
+
+  <p class="text-sm text-gray-500 dark:text-gray-400">
+    Expiry: {{ expiry_time if expiry_time else 'No expiry' }}  | Max views: {{ max_views if max_views else 'Unlimited' }}
+  </p>
+</div>
+
+<script>
+function copyURL(){
+  const txt = document.getElementById('short').href;
+  navigator.clipboard?.writeText(txt).then(()=> {
+    alert("Copied to clipboard!");
+  });
+}
+</script>
+{% endblock %}

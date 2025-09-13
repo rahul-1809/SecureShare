@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white dark:bg-gray-900 shadow-lg rounded-xl p-6 space-y-6">
+  
+  {% if text %}
+    <div>
+      <h2 class="text-lg font-semibold mb-2 text-indigo-600 dark:text-cyan-400">Secret Text</h2>
+      <div class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 
+                  rounded-lg p-4 font-mono text-sm overflow-x-auto shadow-inner">
+        <pre class="whitespace-pre-wrap break-words">{{ text }}</pre>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if has_file %}
+    <div>
+      <h2 class="text-lg font-semibold mb-2 text-indigo-600 dark:text-cyan-400">Secret File</h2>
+      <a href="{{ url_for('download_file', key=key) }}"
+         class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 
+                hover:from-indigo-600 hover:to-cyan-600 text-white py-2 px-5 
+                rounded-lg shadow-lg transition transform hover:scale-105">
+        ⬇️ Download {{ filename }}
+      </a>
+    </div>
+  {% endif %}
+
+  {% if remaining is not none %}
+    <p class="text-sm text-gray-500 dark:text-gray-400">Remaining views: {{ remaining }}</p>
+  {% endif %}
+</div>
+{% endblock %}

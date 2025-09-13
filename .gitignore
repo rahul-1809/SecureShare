@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+links.db
+.env
+# Ignore all files in the uploads directory
+uploads/
