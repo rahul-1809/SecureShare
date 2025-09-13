@@ -114,13 +114,3 @@ FILE_KEY=optional-fernet-key
 * ☁️ Deploy on Render/Heroku/Netlify
 
 ---
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-### 👨‍💻 Author
-
-Developed by **Rahul** ✨
